@@ -1,0 +1,819 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/logo.png" sizes="64x64" />
+    <title>Mannaplus Group of Schools | Grooming the Future Leaders</title>
+    <!-- Google Fonts & Font Awesome -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Dynamic Background -->
+    <div class="bg-canvas">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+      <div class="orb orb-4"></div>
+      <div class="grid-lines"></div>
+    </div>
+
+    <div class="page-wrap">
+      <!-- NAVBAR -->
+      <header id="navbar" class="navbar">
+        <div class="nav-inner">
+          <div class="logo-wrap">
+            <img src="images/logo.png" class="logo-img" alt="Mannaplus Logo" />
+            <div class="logo-text">
+              <div class="school-name">Mannaplus</div>
+              <div class="school-sub">Group of Schools</div>
+            </div>
+          </div>
+          <button class="mobile-btn" id="mobileBtn">
+            <i class="fas fa-bars"></i>
+          </button>
+          <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#programs">Primary</a></li>
+            <li><a href="#college">College</a></li>
+            <li><a href="#mcq">Quiz</a></li>
+            <!-- NEW GALLERY BUTTON (added only here, no existing link removed) -->
+            <li>
+              <a href="#" id="galleryNavBtn"
+                ><i class="fas fa-images"></i> Gallery</a
+              >
+            </li>
+            <li><a href="#admissions">Admissions</a></li>
+            <li><a href="#contact" class="nav-enroll">Enroll Now</a></li>
+          </ul>
+        </div>
+      </header>
+
+      <!-- ANNOUNCEMENT TICKER -->
+      <div class="ticker-wrap">
+        <div class="ticker">
+          <div class="ticker__item">
+            <i class="fas fa-calendar-alt"></i>
+            <strong>📢 UPCOMING EXAMS:</strong> Final Term Examinations – June
+            15th to June 28th, 2026
+          </div>
+          <div class="ticker__item">
+            <i class="fas fa-chalkboard"></i>
+            <strong>✍️ MOCK EXAMS (SS3):</strong> July 5th – July 12th, 2026
+          </div>
+          <div class="ticker__item">
+            <i class="fas fa-school"></i>
+            <strong>🏫 RESUMPTION (2026/2027 SESSION):</strong> Monday,
+            September 7th, 2026
+          </div>
+          <div class="ticker__item">
+            <i class="fas fa-file-alt"></i>
+            <strong>📝 REGISTRATION DEADLINE:</strong> August 20th, 2026 – Apply
+            now!
+          </div>
+          <!-- Duplicate for seamless loop -->
+          <div class="ticker__item">
+            <i class="fas fa-calendar-alt"></i>
+            <strong>📢 UPCOMING EXAMS:</strong> Final Term Examinations – June
+            15th to June 28th, 2026
+          </div>
+          <div class="ticker__item">
+            <i class="fas fa-chalkboard"></i>
+            <strong>✍️ MOCK EXAMS (SS3):</strong> July 5th – July 12th, 2026
+          </div>
+          <div class="ticker__item">
+            <i class="fas fa-school"></i>
+            <strong>🏫 RESUMPTION (2026/2027 SESSION):</strong> Monday,
+            September 7th, 2026
+          </div>
+          <div class="ticker__item">
+            <i class="fas fa-file-alt"></i>
+            <strong>📝 REGISTRATION DEADLINE:</strong> August 20th, 2026 – Apply
+            now!
+          </div>
+        </div>
+      </div>
+
+      <!-- HERO -->
+      <section id="home">
+        <div class="container">
+          <div class="hero-grid">
+            <div class="hero-content">
+              <div class="hero-badge">
+                <i class="fas fa-star"></i> Since 1998 — Established Excellence
+              </div>
+              <h1 class="hero-heading">
+                Grooming the <span class="line-gold">Future Leaders</span> of
+                Tomorrow
+              </h1>
+              <p class="hero-sub">
+                Mannaplus Group of Schools delivers world-class education from
+                Primary through College — nurturing bright minds with wisdom,
+                integrity, and excellence at every stage.
+              </p>
+              <div class="hero-btns">
+                <a href="#admissions" class="btn-gold"
+                  ><i class="fas fa-graduation-cap"></i> Enroll Today</a
+                >
+                <a href="#about" class="btn-glass"
+                  ><i class="fas fa-play-circle"></i> Discover More</a
+                >
+              </div>
+              <div class="hero-stats">
+                <div class="stat-item">
+                  <div class="stat-num">25+</div>
+                  <div class="stat-lbl">Years of Excellence</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-num">3,000+</div>
+                  <div class="stat-lbl">Alumni</div>
+                </div>
+                <div class="stat-item">
+                  <div class="stat-num">95%</div>
+                  <div class="stat-lbl">WAEC Pass Rate</div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="slider-wrap">
+                <div class="slides" id="heroSlides">
+                  <div class="slide">
+                    <img
+                      src="https://picsum.photos/id/20/700/440"
+                      alt="School Campus"
+                    />
+                    <div class="slide-caption">
+                      <i class="fas fa-map-marker-alt"></i> Main Campus —
+                      Mannaplus Primary
+                    </div>
+                  </div>
+                  <div class="slide">
+                    <img
+                      src="https://picsum.photos/id/119/700/440"
+                      alt="Science Lab"
+                    />
+                    <div class="slide-caption">
+                      <i class="fas fa-flask"></i> State-of-the-Art Science
+                      Laboratories
+                    </div>
+                  </div>
+                  <div class="slide">
+                    <img src="images/library.png" alt="Library" />
+                    <div class="slide-caption">
+                      <i class="fas fa-book-open"></i> Modern Library &
+                      e-Learning Hub
+                    </div>
+                  </div>
+                  <div class="slide">
+                    <img
+                      src="https://picsum.photos/id/43/700/440"
+                      alt="Sports"
+                    />
+                    <div class="slide-caption">
+                      <i class="fas fa-futbol"></i> Sports Academy & Athletics
+                      Fields
+                    </div>
+                  </div>
+                  <div class="slide">
+                    <img src="https://picsum.photos/id/60/700/440" alt="Arts" />
+                    <div class="slide-caption">
+                      <i class="fas fa-palette"></i> Creative Arts & Drama
+                      Studios
+                    </div>
+                  </div>
+                </div>
+                <button class="slider-arrow arrow-prev" id="prevBtn">
+                  <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="slider-arrow arrow-next" id="nextBtn">
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+                <div class="slider-nav" id="sliderDots"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about">
+        <div class="container">
+          <div class="text-center">
+            <span class="section-label">Who We Are</span>
+            <h2 class="section-title">About Mannaplus</h2>
+            <p class="section-sub mx-auto">
+              Integrating academic rigour with spiritual and moral upbringing —
+              a legacy of educational transformation since 1998.
+            </p>
+          </div>
+          <div class="about-grid">
+            <div class="about-card glass reveal">
+              <div class="about-icon"><i class="fas fa-school"></i></div>
+              <h3>Our Philosophy</h3>
+              <p>
+                At Mannaplus, every child is unique. We blend the Nigerian
+                national curriculum with international best practices,
+                emphasising critical thinking, creativity, and leadership
+                development.
+              </p>
+              <p>
+                Our safe, nurturing environment develops learners who excel
+                academically and shine in character, faith, and community
+                contribution.
+              </p>
+            </div>
+            <div class="about-card glass reveal">
+              <div class="about-icon">
+                <i class="fas fa-chalkboard-teacher"></i>
+              </div>
+              <h3>Why Choose Mannaplus?</h3>
+              <ul class="check-list">
+                <li>
+                  <i class="fas fa-check-circle"></i> Certified, passionate, and
+                  experienced teachers
+                </li>
+                <li>
+                  <i class="fas fa-check-circle"></i> Smart classrooms equipped
+                  with STEM labs
+                </li>
+                <li>
+                  <i class="fas fa-check-circle"></i> Sports, arts, drama &
+                  leadership clubs
+                </li>
+                <li>
+                  <i class="fas fa-check-circle"></i> Pastoral care, counselling
+                  & mentoring
+                </li>
+                <li>
+                  <i class="fas fa-check-circle"></i> Modern library &
+                  e-learning resources
+                </li>
+                <li>
+                  <i class="fas fa-check-circle"></i> Robotics and coding for
+                  innovators
+                </li>
+                <li>
+                  <i class="fas fa-check-circle"></i> Dedicated examination
+                  preparation centres
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PRIMARY PROGRAMS -->
+      <section id="programs">
+        <div class="container">
+          <div class="text-center">
+            <span class="section-label">Primary School</span>
+            <h2 class="section-title">🌟 Building Strong Foundations</h2>
+            <p class="section-sub mx-auto">
+              Grades 1–6 with a blend of Montessori approaches, hands-on
+              learning, and deep-rooted values education.
+            </p>
+          </div>
+          <div class="programs-grid">
+            <div class="prog-card glass reveal">
+              <div class="prog-icon">📚</div>
+              <span class="prog-badge">Literacy & Numeracy</span>
+              <h3>Core Academics</h3>
+              <p>
+                English, Mathematics, Basic Science, Social Studies, French,
+                ICT, and Christian Religious Studies with a focus on building
+                unshakeable foundations for lifelong learning.
+              </p>
+            </div>
+            <div class="prog-card glass reveal">
+              <div class="prog-icon">🎨</div>
+              <span class="prog-badge">Creative Arts & Sports</span>
+              <h3>Holistic Growth</h3>
+              <p>
+                Music, drama, swimming, athletics, and weekly inter-house
+                competitions designed to discover hidden talents and build
+                lasting confidence in every child.
+              </p>
+            </div>
+            <div class="prog-card glass reveal">
+              <div class="prog-icon">✨</div>
+              <span class="prog-badge">Character First</span>
+              <h3>Moral & Leadership</h3>
+              <p>
+                Morning devotion, moral instruction, student prefect system, and
+                weekly community service integrated deeply into our school
+                schedule and culture.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- GALLERY SLIDER -->
+      <section id="gallery">
+        <div class="container">
+          <div class="gallery-title reveal">
+            <span class="section-label">School Life</span>
+            <h2 class="section-title">Campus Highlights</h2>
+          </div>
+          <div class="gallery-slider-wrap reveal">
+            <div class="gallery-track" id="galleryTrack">
+              <div class="gallery-slide">
+                <img
+                  src="https://picsum.photos/id/25/600/300"
+                  alt="Classroom"
+                />
+                <div class="overlay"><span>Smart Classrooms</span></div>
+              </div>
+              <div class="gallery-slide">
+                <img src="images/science lab.jpg" alt="Labs" />
+                <div class="overlay"><span>Science Labs</span></div>
+              </div>
+              <div class="gallery-slide">
+                <img src="https://picsum.photos/id/55/600/300" alt="Sports" />
+                <div class="overlay"><span>Sports Grounds</span></div>
+              </div>
+              <div class="gallery-slide">
+                <img src="images/school-library.webp" alt="Library" />
+                <div class="overlay"><span>School Library</span></div>
+              </div>
+              <div class="gallery-slide">
+                <img src="https://picsum.photos/id/145/600/300" alt="Arts" />
+                <div class="overlay"><span>Arts Studio</span></div>
+              </div>
+              <div class="gallery-slide">
+                <img src="https://picsum.photos/id/40/600/300" alt="Campus" />
+                <div class="overlay"><span>Campus Gardens</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- COLLEGE -->
+      <section id="college">
+        <div class="container">
+          <div class="text-center">
+            <span class="section-label">Secondary School</span>
+            <h2 class="section-title">🏫 College — JSS1 to SSS3</h2>
+            <p class="section-sub mx-auto">
+              Preparing future-ready graduates for WASSCE, NECO, JAMB, and
+              global opportunities with excellence at every level.
+            </p>
+          </div>
+          <div class="college-split">
+            <div class="college-block glass reveal">
+              <h3><i class="fas fa-flask"></i> Science & Technology</h3>
+              <p>
+                State-of-the-art laboratories for Physics, Chemistry, Biology,
+                and Computer Science. Our robotics and coding clubs empower the
+                next generation of innovators.
+              </p>
+              <p>
+                Hands-on experiments, research projects, and STEM fairs keep
+                students engaged and industry-ready from an early age.
+              </p>
+            </div>
+            <div class="college-block glass reveal">
+              <h3><i class="fas fa-chart-line"></i> Commercial & Arts</h3>
+              <p>
+                Diverse subject offerings including Accounting, Commerce,
+                Literature, Government, Economics, and Creative Writing. Career
+                counselling is integrated across all years.
+              </p>
+              <p>
+                Our commercial track produces graduates ready for university,
+                entrepreneurship, and professional careers.
+              </p>
+            </div>
+          </div>
+          <div class="college-mini">
+            <div class="mini-card glass reveal">
+              <i class="fas fa-users"></i>
+              <h4>Leadership Campus</h4>
+              <p>
+                Student council, debate team, Model UN, and entrepreneurship
+                fairs forge tomorrow's leaders today.
+              </p>
+            </div>
+            <div class="mini-card glass reveal">
+              <i class="fas fa-graduation-cap"></i>
+              <h4>Exam Excellence</h4>
+              <p>
+                WAEC, NECO & JAMB prep classes with a 95% success rate in
+                tertiary admissions placement.
+              </p>
+            </div>
+            <div class="mini-card glass reveal">
+              <i class="fas fa-futbol"></i>
+              <h4>Sports Academy</h4>
+              <p>
+                Football, basketball, track & field with inter-school
+                competitions and our annual sports gala.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- MCQ QUIZ -->
+      <section id="mcq">
+        <div class="container">
+          <div class="text-center">
+            <span class="section-label">Academic Challenge</span>
+            <h2 class="section-title">🧠 Test Your Knowledge</h2>
+            <p class="section-sub mx-auto">
+              Choose a subject and difficulty, then generate a fresh set of live
+              questions from a global academic database — new questions every
+              single time!
+            </p>
+          </div>
+          <div
+            class="quiz-config glass"
+            style="max-width: 860px; margin: 0 auto 2rem"
+          >
+            <div class="config-title">
+              <i class="fas fa-sliders-h"></i> Customise Your Quiz
+            </div>
+            <div class="config-row">
+              <div class="config-group">
+                <label>📚 Subject / Category</label
+                ><select id="quizCategory">
+                  <option value="">🎲 Any Category</option>
+                  <option value="9">🌍 General Knowledge</option>
+                  <option value="17">🔬 Science &amp; Nature</option>
+                  <option value="19">📐 Mathematics</option>
+                  <option value="23">📜 History</option>
+                  <option value="22">🗺️ Geography</option>
+                  <option value="18">💻 Computers &amp; Tech</option>
+                  <option value="25">🎨 Art &amp; Literature</option>
+                  <option value="21">⚽ Sports</option>
+                  <option value="27">🐾 Animals &amp; Biology</option>
+                  <option value="10">📖 Books</option>
+                </select>
+              </div>
+              <div class="config-group">
+                <label>⚡ Difficulty</label
+                ><select id="quizDifficulty">
+                  <option value="">Any Difficulty</option>
+                  <option value="easy">🟢 Easy</option>
+                  <option value="medium">🟡 Medium</option>
+                  <option value="hard">🔴 Hard</option>
+                </select>
+              </div>
+              <div class="config-group">
+                <label>🔢 No. of Questions</label
+                ><select id="quizAmount">
+                  <option value="5">5 Questions</option>
+                  <option value="10" selected>10 Questions</option>
+                  <option value="15">15 Questions</option>
+                  <option value="20">20 Questions</option>
+                </select>
+              </div>
+              <button
+                class="btn-generate"
+                id="generateBtn"
+                onclick="startNewQuiz()"
+              >
+                <i class="fas fa-bolt"></i> Generate Quiz
+              </button>
+            </div>
+          </div>
+          <div class="quiz-container" style="max-width: 760px; margin: 0 auto">
+            <div class="quiz-progress-bar">
+              <div
+                class="quiz-progress-fill"
+                id="progressFill"
+                style="width: 0%"
+              ></div>
+            </div>
+            <div id="quizArea"></div>
+            <div class="quiz-score glass-strong" id="quizScore">
+              <div class="score-num" id="scoreNum">0/10</div>
+              <div class="score-label">Questions Answered Correctly</div>
+              <div class="score-msg" id="scoreMsg"></div>
+              <p
+                style="
+                  color: var(--text-muted);
+                  font-size: 0.9rem;
+                  line-height: 1.7;
+                  margin-bottom: 1.5rem;
+                "
+              >
+                Knowledge is the greatest gift — keep learning every day at
+                Mannaplus! Hit Generate Quiz for a brand new set!
+              </p>
+              <div
+                style="
+                  display: flex;
+                  gap: 1rem;
+                  justify-content: center;
+                  flex-wrap: wrap;
+                "
+              >
+                <button class="btn-quiz btn-quiz-gold" onclick="restartQuiz()">
+                  <i class="fas fa-redo"></i> Retry Same Quiz</button
+                ><button
+                  class="btn-quiz btn-quiz-glass"
+                  onclick="startNewQuiz()"
+                >
+                  <i class="fas fa-bolt"></i> New Questions
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ADMISSIONS -->
+      <section id="admissions">
+        <div class="container">
+          <div class="text-center">
+            <span class="section-label">Join Us</span>
+            <h2 class="section-title">📋 Admissions Open 2026/2027</h2>
+            <p class="section-sub mx-auto">
+              Join the Mannaplus family — limited seats available for both
+              Primary and College sections. Apply early to secure placement.
+            </p>
+          </div>
+          <div class="steps-row">
+            <div class="step-card glass reveal">
+              <div class="step-num">1</div>
+              <h3>Application</h3>
+              <p>
+                Complete the online form or download the prospectus from our
+                admissions portal.
+              </p>
+            </div>
+            <div class="step-card glass reveal">
+              <div class="step-num">2</div>
+              <h3>Entrance Exam</h3>
+              <p>
+                Written assessment in English, Mathematics, and General
+                Knowledge at our campus.
+              </p>
+            </div>
+            <div class="step-card glass reveal">
+              <div class="step-num">3</div>
+              <h3>Interview</h3>
+              <p>
+                Parent-and-child interactive session with the principal and
+                admissions team.
+              </p>
+            </div>
+            <div class="step-card glass reveal">
+              <div class="step-num">4</div>
+              <h3>Enrollment</h3>
+              <p>
+                Secure your child's placement with confirmation of tuition fee
+                payment.
+              </p>
+            </div>
+          </div>
+          <div class="admissions-cta">
+            <a href="#contact" class="btn-gold"
+              ><i class="fas fa-file-alt"></i> Apply Now</a
+            ><a href="#contact" class="btn-glass"
+              ><i class="fas fa-download"></i> Download Prospectus</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact">
+        <div class="container">
+          <div class="text-center">
+            <span class="section-label">Get in Touch</span>
+            <h2 class="section-title">📞 Contact & Enquiries</h2>
+            <p class="section-sub mx-auto">
+              We'd love to hear from you — schedule a campus tour or ask us
+              anything.
+            </p>
+          </div>
+          <div class="contact-grid">
+            <div class="contact-info glass reveal">
+              <h3>Reach Us Directly</h3>
+              <div class="contact-detail">
+                <div class="icon-wrap">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="detail-text">
+                  <strong>Main Campus</strong><br />34, Orisun Ibukun Avenue,
+                  Arinko Road,<br />Sango Ota, Ogun State, Nigeria.
+                </div>
+              </div>
+              <div class="contact-detail">
+                <div class="icon-wrap"><i class="fas fa-phone-alt"></i></div>
+                <div class="detail-text">
+                  <strong>Phone</strong><br />+234 812 345 6789<br />+234 906
+                  789 0123
+                </div>
+              </div>
+              <div class="contact-detail">
+                <div class="icon-wrap"><i class="fas fa-envelope"></i></div>
+                <div class="detail-text">
+                  <strong>Email</strong
+                  ><br />info@mannaplusgroup.edu.ng<br />admissions@mannaplusgroup.edu.ng
+                </div>
+              </div>
+              <div class="contact-detail">
+                <div class="icon-wrap"><i class="fas fa-clock"></i></div>
+                <div class="detail-text">
+                  <strong>Office Hours</strong><br />Mon – Fri: 8:00am –
+                  4:00pm<br />Saturday: 10:00am – 1:00pm (Admin only)
+                </div>
+              </div>
+              <div class="socials">
+                <a href="#" class="social-btn"
+                  ><i class="fab fa-facebook-f"></i></a
+                ><a href="#" class="social-btn"
+                  ><i class="fab fa-instagram"></i></a
+                ><a href="#" class="social-btn"
+                  ><i class="fab fa-twitter"></i></a
+                ><a href="#" class="social-btn"
+                  ><i class="fab fa-whatsapp"></i></a
+                ><a href="#" class="social-btn"
+                  ><i class="fab fa-youtube"></i
+                ></a>
+              </div>
+            </div>
+            <div class="contact-form glass reveal">
+              <h3>Send an Enquiry</h3>
+              <form id="contactForm">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>Full Name *</label
+                    ><input
+                      type="text"
+                      placeholder="e.g. Adebayo Okonkwo"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>Email *</label
+                    ><input
+                      type="email"
+                      placeholder="your@email.com"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>Phone</label
+                    ><input type="tel" placeholder="+234 800 000 0000" />
+                  </div>
+                  <div class="form-group">
+                    <label>Interest</label
+                    ><select>
+                      <option>Primary School Enquiry</option>
+                      <option>College (JSS1–SSS3) Enquiry</option>
+                      <option>Admissions Information</option>
+                      <option>General Enquiry</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Message</label
+                  ><textarea
+                    rows="4"
+                    placeholder="Your message or question..."
+                  ></textarea>
+                </div>
+                <button type="submit" class="form-submit">
+                  <i class="fas fa-paper-plane"></i> Send Message
+                </button>
+                <p class="form-success" id="formSuccess">
+                  ✅ Thank you! The admissions office will respond to you
+                  shortly.
+                </p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer>
+        <div class="container">
+          <div class="footer-grid">
+            <div class="footer-about">
+              <div class="footer-logo">
+                <img
+                  src="images/logo.png"
+                  class="logo-img"
+                  alt="Mannaplus Logo"
+                />
+                <div>
+                  <div
+                    style="
+                      font-family: &quot;Playfair Display&quot;, serif;
+                      font-weight: 800;
+                      font-size: 1.1rem;
+                    "
+                  >
+                    Mannaplus
+                  </div>
+                  <div
+                    style="
+                      font-size: 0.72rem;
+                      color: var(--gold);
+                      letter-spacing: 1px;
+                      text-transform: uppercase;
+                    "
+                  >
+                    Group of Schools
+                  </div>
+                </div>
+              </div>
+              <p>
+                Motto: <em>Grooming the Future Leaders</em> — Nurturing godly,
+                innovative, and responsible global citizens since 1998.
+              </p>
+            </div>
+            <div class="footer-col">
+              <h4>Quick Links</h4>
+              <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#programs">Primary School</a></li>
+                <li><a href="#college">College</a></li>
+                <li><a href="#admissions">Admissions</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h4>Resources</h4>
+              <ul>
+                <li><a href="#">Academic Calendar</a></li>
+                <li><a href="#">Parent Portal</a></li>
+                <li><a href="#">Student E-Mail</a></li>
+                <li><a href="#">Staff Portal</a></li>
+                <li><a href="#">Career @Mannaplus</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h4>Contact</h4>
+              <ul>
+                <li><a href="#">info@mannaplusgroup.edu.ng</a></li>
+                <li><a href="#">+234 812 345 6789</a></li>
+                <li>
+                  <a href="#">34, Orisun Ibukun Avenue, Arinko Sango Ota</a>
+                </li>
+                <li><a href="#">Ogun State, Nigeria</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <p>
+              &copy; 2025 Mannaplus Group of Schools (Primary & College). All
+              rights reserved. | Wisdom · Integrity · Excellence
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <button class="scroll-top" id="scrollTop">
+      <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- NEW GALLERY MODAL (added at the end of body, does not interfere) -->
+    <div id="photoGalleryModal" class="gallery-modal">
+      <div class="gallery-container">
+        <div class="gallery-header">
+          <h2><i class="fas fa-images"></i> School Photo Gallery</h2>
+          <button class="close-gallery" id="closeGalleryBtn">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div id="galleryDynamicContent"></div>
+      </div>
+    </div>
+
+    <!-- LIGHTBOX MODAL WITH SLIDER BUTTONS -->
+    <div id="lightboxModal" class="lightbox-modal">
+      <span class="lightbox-close">&times;</span>
+      <button class="lightbox-prev" id="lightboxPrev">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <img class="lightbox-content" id="lightboxImg" />
+      <button class="lightbox-next" id="lightboxNext">
+        <i class="fas fa-chevron-right"></i>
+      </button>
+      <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
