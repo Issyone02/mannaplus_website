@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mannaplus – Apply for Admission</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      /* Extra styles just for the application page */
+      .application-form {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem;
+        border-radius: 24px;
+      }
+      .form-title {
+        font-family: "Playfair Display", serif;
+        font-size: 2rem;
+        color: var(--gold);
+        margin-bottom: 0.5rem;
+      }
+      .form-subtitle {
+        color: var(--text-muted);
+        margin-bottom: 2rem;
+        font-size: 1rem;
+      }
+      .form-group {
+        margin-bottom: 1.2rem;
+      }
+      .form-group label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 0.4rem;
+        color: var(--gold-light);
+      }
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 0.9rem;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 12px;
+        color: white;
+        font-family: "DM Sans", sans-serif;
+        font-size: 0.95rem;
+      }
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: var(--gold);
+      }
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+      .btn-submit {
+        background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+        color: var(--green-dark);
+        font-weight: 700;
+        padding: 1rem;
+        width: 100%;
+        border: none;
+        border-radius: 40px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: 0.25s;
+        margin-top: 1rem;
+      }
+      .btn-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(245, 158, 11, 0.4);
+      }
+      .alert {
+        background: rgba(34, 197, 94, 0.2);
+        border: 1px solid #22c55e;
+        border-radius: 12px;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        color: #86efac;
+        display: none;
+      }
+      .alert.error {
+        background: rgba(239, 68, 68, 0.2);
+        border-color: #ef4444;
+        color: #fca5a5;
+      }
+      @media (max-width: 700px) {
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+        .application-form {
+          padding: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Background (same as homepage) -->
+    <div class="bg-canvas">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+      <div class="orb orb-4"></div>
+      <div class="grid-lines"></div>
+    </div>
+
+    <div class="page-wrap">
+      <!-- Navbar (same as homepage) -->
+      <header id="navbar" class="navbar">
+        <div class="nav-inner">
+          <div class="logo-wrap">
+            <img src="images/logo.png" class="logo-img" alt="Mannaplus Logo" />
+            <div class="logo-text">
+              <div class="school-name">Mannaplus</div>
+              <div class="school-sub">Group of Schools</div>
+            </div>
+          </div>
+          <button class="mobile-btn" id="mobileBtn">
+            <i class="fas fa-bars"></i>
+          </button>
+          <ul class="nav-links" id="navLinks">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#programs">Primary</a></li>
+            <li><a href="index.html#college">College</a></li>
+            <li><a href="index.html#mcq">Quiz</a></li>
+            <li><a href="index.html#galleryNavBtn">Gallery</a></li>
+            <li><a href="index.html#admissions">Admissions</a></li>
+            <li><a href="#" class="nav-enroll">Enroll Now</a></li>
+          </ul>
+        </div>
+      </header>
+
+      <div class="container" style="padding: 4rem 1.5rem">
+        <div class="application-form glass">
+          <div class="text-center">
+            <span class="section-label">Start Your Journey</span>
+            <h1 class="form-title">📋 Application for Admission</h1>
+            <p class="form-subtitle">
+              Complete the form below. Our admissions team will contact you
+              within 2 working days.
+            </p>
+          </div>
+
+          <!-- Success/Error message area -->
+          <div id="formAlert" class="alert"></div>
+
+          <!-- Formspree integration – replace YOUR_FORM_ID with your actual Formspree endpoint -->
+          <form
+            id="applicationForm"
+            action="https://formspree.io/f/YOUR_FORM_ID"
+            method="POST"
+          >
+            <!-- Student Information -->
+            <div class="form-group">
+              <label
+                ><i class="fas fa-user-graduate"></i> Student's Full Name
+                *</label
+              >
+              <input
+                type="text"
+                name="student_name"
+                id="studentName"
+                required
+                placeholder="e.g., Adebayo Olamide"
+              />
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Date of Birth *</label>
+                <input type="date" name="dob" id="dob" required />
+              </div>
+              <div class="form-group">
+                <label>Gender *</label>
+                <select name="gender" id="gender" required>
+                  <option value="">Select</option>
+                  <option>Male</option>
+                  <option>Female</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Applying for Class *</label>
+              <select name="class" id="class" required>
+                <option value="">Select Grade</option>
+                <option>Primary 1</option>
+                <option>Primary 2</option>
+                <option>Primary 3</option>
+                <option>Primary 4</option>
+                <option>Primary 5</option>
+                <option>Primary 6</option>
+                <option>JSS 1</option>
+                <option>JSS 2</option>
+                <option>JSS 3</option>
+                <option>SSS 1</option>
+                <option>SSS 2</option>
+                <option>SSS 3</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Previous School (if any)</label>
+              <input
+                type="text"
+                name="prev_school"
+                id="prevSchool"
+                placeholder="Name of last school attended"
+              />
+            </div>
+
+            <!-- Parent/Guardian Information -->
+            <h3
+              style="
+                margin: 2rem 0 1rem;
+                font-family: &quot;Playfair Display&quot;;
+                color: var(--gold);
+              "
+            >
+              Parent / Guardian Details
+            </h3>
+
+            <div class="form-group">
+              <label>Full Name *</label>
+              <input
+                type="text"
+                name="parent_name"
+                id="parentName"
+                required
+                placeholder="e.g., Mr. Olu Adebayo"
+              />
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label>Phone Number *</label>
+                <input
+                  type="tel"
+                  name="phone"
+                  id="phone"
+                  required
+                  placeholder="+234 812 345 6789"
+                />
+              </div>
+              <div class="form-group">
+                <label>Email Address *</label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  required
+                  placeholder="parent@example.com"
+                />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Residential Address *</label>
+              <textarea
+                name="address"
+                id="address"
+                rows="2"
+                required
+                placeholder="Street, city, state..."
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label>How did you hear about us?</label>
+              <select name="source" id="source">
+                <option>Social Media</option>
+                <option>Friend/Family</option>
+                <option>School Event</option>
+                <option>Online Search</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Additional Comments (optional)</label>
+              <textarea
+                name="message"
+                id="message"
+                rows="3"
+                placeholder="Any special requests or questions..."
+              ></textarea>
+            </div>
+
+            <!-- Honeypot spam protection (hidden) -->
+            <input
+              type="text"
+              name="_gotcha"
+              style="display: none"
+              tabindex="-1"
+              autocomplete="off"
+            />
+
+            <button type="submit" class="btn-submit">
+              <i class="fas fa-paper-plane"></i> Submit Application
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Footer (same as homepage) -->
+      <footer>
+        <div class="container">
+          <div class="footer-grid">
+            <div class="footer-about">
+              <div class="footer-logo">
+                <img
+                  src="images/logo.png"
+                  class="logo-img"
+                  alt="Mannaplus Logo"
+                />
+                <div>
+                  <div
+                    style="
+                      font-family: &quot;Playfair Display&quot;, serif;
+                      font-weight: 800;
+                      font-size: 1.1rem;
+                    "
+                  >
+                    Mannaplus
+                  </div>
+                  <div
+                    style="
+                      font-size: 0.72rem;
+                      color: var(--gold);
+                      letter-spacing: 1px;
+                      text-transform: uppercase;
+                    "
+                  >
+                    Group of Schools
+                  </div>
+                </div>
+              </div>
+              <p>
+                Grooming the Future Leaders — Nurturing godly, innovative, and
+                responsible global citizens since 2012.
+              </p>
+            </div>
+            <div class="footer-col">
+              <h4>Quick Links</h4>
+              <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About Us</a></li>
+                <li><a href="index.html#admissions">Admissions</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h4>Contact</h4>
+              <ul>
+                <li><a href="#">info@mannaplusgroup.edu.ng</a></li>
+                <li><a href="#">+234 812 345 6789</a></li>
+                <li>
+                  <a href="#"
+                    >34, Orisun Ibukun Avenue, Sango Ota, Ogun State</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <p>&copy; 2026 Mannaplus Group of Schools. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <button class="scroll-top" id="scrollTop">
+      <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script>
+      // Mobile menu (same as index.html)
+      document
+        .getElementById("mobileBtn")
+        ?.addEventListener("click", function () {
+          document.getElementById("navLinks").classList.toggle("open");
+          this.querySelector("i").className = document
+            .getElementById("navLinks")
+            .classList.contains("open")
+            ? "fas fa-times"
+            : "fas fa-bars";
+        });
+      document.querySelectorAll(".nav-links a").forEach((a) => {
+        a.onclick = () => {
+          document.getElementById("navLinks").classList.remove("open");
+          document.getElementById("mobileBtn").querySelector("i").className =
+            "fas fa-bars";
+        };
+      });
+
+      // Scroll top button
+      window.addEventListener("scroll", () => {
+        const st = document.getElementById("scrollTop");
+        if (window.scrollY > 300) st.classList.add("show");
+        else st.classList.remove("show");
+      });
+      document.getElementById("scrollTop").onclick = () =>
+        window.scrollTo({ top: 0, behavior: "smooth" });
+
+      // Application form submission with Formspree (fetch – no page reload)
+      const form = document.getElementById("applicationForm");
+      const alertBox = document.getElementById("formAlert");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML =
+          '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+
+        try {
+          const response = await fetch(form.action, {
+            method: "POST",
+            body: new FormData(form),
+            headers: { Accept: "application/json" },
+          });
+          if (response.ok) {
+            alertBox.textContent =
+              "✅ Application submitted! Our admissions office will contact you within 48 hours.";
+            alertBox.className = "alert";
+            alertBox.style.display = "block";
+            form.reset();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+            setTimeout(() => {
+              alertBox.style.display = "none";
+            }, 6000);
+          } else {
+            throw new Error("Server error");
+          }
+        } catch (err) {
+          alertBox.textContent =
+            "❌ Submission failed. Please try again later or call us directly.";
+          alertBox.className = "alert error";
+          alertBox.style.display = "block";
+          setTimeout(() => {
+            alertBox.style.display = "none";
+          }, 5000);
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalText;
+        }
+      });
+    </script>
+  </body>
+</html>

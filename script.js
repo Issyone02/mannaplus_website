@@ -72,6 +72,30 @@ async function startNewQuiz() {
   const amt = parseInt(document.getElementById("quizAmount").value) || 10;
   totalQuestions = amt;
 
+  // --- CACHE KEY based on category, difficulty, amount ---
+  const cacheKey = `quiz_${cat}_${diff}_${amt}`;
+  const cached = localStorage.getItem(cacheKey);
+  const CACHE_DURATION_MS = 7 * 24 * 60 * 60 * 1000; // 1 week – change as needed
+
+  if (cached) {
+    try {
+      const { timestamp, data } = JSON.parse(cached);
+      const now = Date.now();
+      if (now - timestamp < CACHE_DURATION_MS) {
+        // Use cached questions
+        shuffledQuiz = buildQuizFromAPI(data.results);
+        currentQ = 0; score = 0; answered = [];
+        document.getElementById("quizScore").classList.remove("show");
+        document.getElementById("quizArea").style.display = "";
+        renderQuestion(0);
+        console.log("Loaded quiz from cache");
+        return;
+      } else {
+        localStorage.removeItem(cacheKey);
+      }
+    } catch(e) { /* ignore and fetch fresh */ }
+  }
+
   const btn = document.getElementById("generateBtn");
   btn.disabled = true;
   btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Fetching…';
@@ -92,6 +116,11 @@ async function startNewQuiz() {
       return;
     }
     if (data.response_code !== 0 || !data.results?.length) throw new Error("Bad API response (code " + data.response_code + ")");
+
+    // Save to cache
+    const cacheData = { timestamp: Date.now(), results: data.results };
+    localStorage.setItem(cacheKey, JSON.stringify(cacheData));
+
     currentQ = 0; score = 0; answered = [];
     shuffledQuiz = buildQuizFromAPI(data.results);
     document.getElementById("quizScore").classList.remove("show");
@@ -265,13 +294,36 @@ document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 // ===== SCROLL TOP BUTTON =====
 document.getElementById("scrollTop").onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
-// ===== CONTACT FORM =====
-document.getElementById("contactForm").onsubmit = function(e) {
+/// ===== CONTACT FORM (Formspree integration) =====
+document.getElementById("contactForm").onsubmit = async function(e) {
   e.preventDefault();
-  const s = document.getElementById("formSuccess");
-  s.style.display = "block";
-  this.reset();
-  setTimeout(() => s.style.display = "none", 5000);
+  const form = e.target;
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const originalText = submitBtn.innerHTML;
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+  try {
+    const response = await fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    });
+    if (response.ok) {
+      const successMsg = document.getElementById("formSuccess");
+      successMsg.style.display = "block";
+      form.reset();
+      setTimeout(() => { successMsg.style.display = "none"; }, 5000);
+    } else {
+      alert('Something went wrong. Please try again later or call us directly.');
+    }
+  } catch (error) {
+    console.error('Form submission error:', error);
+    alert('Network error. Please check your connection and try again.');
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = originalText;
+  }
 };
 
 // ===== INITIAL QUIZ LOAD =====
@@ -279,10 +331,8 @@ startNewQuiz();
 
 // ========== FIX: Make gallery modal header sticky and content scrollable ==========
 (function fixGalleryModalScroll() {
-  // Add CSS to keep the close button and back button always visible
   const style = document.createElement('style');
   style.textContent = `
-    /* Keep gallery modal header fixed at top */
     .gallery-modal .gallery-container {
       display: flex;
       flex-direction: column;
@@ -306,14 +356,12 @@ startNewQuiz();
       overflow-y: auto;
       padding-right: 0.5rem;
     }
-    /* Ensure back button is always visible at top of content */
     .gallery-modal #galleryDynamicContent .back-nav-btn {
       position: sticky;
       top: 0;
       z-index: 5;
       margin-bottom: 1rem;
     }
-    /* For smaller screens, adjust padding */
     @media (max-width: 700px) {
       .gallery-modal .gallery-container {
         padding: 0.8rem;
@@ -323,100 +371,127 @@ startNewQuiz();
   document.head.appendChild(style);
 })();
 
-// ========== GALLERY DATA ==========
+// ========== GALLERY DATA (all categories converted to object format with description) ==========
 const galleryImages = {
-  cultural: [
-    { url: "./cultural/proprietor.png", caption: "Proprietor's Attire" },
-    { url: "./cultural/proprietress.png", caption: "Proprietress's Attire" },
-    { url: "./cultural/cultural1.png", caption: "Student's Attire" },
-    { url: "./cultural/cultural2.png", caption: "Cultural Attires" },
-    { url: "./cultural/cultural3.png", caption: "Student's Attire" },
-    { url: "./cultural/cultural4.png", caption: "Cultural Attires" }
-  ],
-  indomie: [
-    { url: "https://picsum.photos/id/127/500/350", caption: "Indomie Factory Tour" },
-    { url: "https://picsum.photos/id/129/500/350", caption: "Production Line" },
-    { url: "https://picsum.photos/id/113/500/350", caption: "Students at Indomie" },
-    { url: "https://picsum.photos/id/109/500/350", caption: "Packaging Section" },
-    { url: "https://picsum.photos/id/70/500/350", caption: "Learning Process" }
-  ],
-  badagry: [
-    { url: "./badagry/badagry.jpg", caption: "some shots taken " },
-    { url: "./badagry/badagry1.jpg", caption: "some shots taken" },
-    { url: "./badagry/badagry2.jpg", caption: "some shots taken" },
-    { url: "./badagry/badagry3.jpg", caption: "some shots taken" },
-    { url: "./badagry/badagry4.jpg", caption: "some shots taken" },
-    { url: "./badagry/badagry5.jpg", caption: "some shots taken" },
-    { url: "./badagry/badagry6.jpg", caption: "some shots taken" },
-    { url: "./badagry/badagry7.jpg", caption: "some shots taken" },
-    { url: "./badagry/badagry8.jpg", caption: "some shots taken" },
-    { url: "./badagry/badagry9.jpg", caption: "some shots taken" },
-    { url: "./badagry/badagry10.jpg", caption: "some shots taken" }
-  ],
-  obasanjo: [
-    { url: "./obasanjo/obasanjo.jpg", caption: "Presidential Library" },
-    { url: "./obasanjo/obasanjo1.jpg", caption: "Presidential Library" },
-    { url: "./obasanjo/obasanjo2.jpg", caption: "Presidential Library" },
-    { url: "./obasanjo/obasanjo3.jpg", caption: "Presidential Library" },
-    { url: "./obasanjo/obasanjo4.jpg", caption: "Presidential Library" },
-    { url: "./obasanjo/obasanjo5.jpg", caption: "Presidential Library" }
-  ],
-  abeokuta: [
-    { url: "https://picsum.photos/id/96/500/350", caption: "Olumo Rock" },
-    { url: "https://picsum.photos/id/190/500/350", caption: "Abeokuta City View" },
-    { url: "https://picsum.photos/id/168/500/350", caption: "Historical Sites" }
-  ],
-  wildlife: [
-    { url: "./wildlife/donkey.jpg", caption: "Donkey in Habitat" },
-    { url: "./wildlife/horse.jpg ", caption: "Horses at Library" },
-    { url: "./wildlife/hyena.jpg", caption: "Hyena in Habitat" },
-    { url: "./wildlife/wildlife1.jpg", caption: "Students at Wildlife Section" },
-    { url: "./wildlife/peacock.jpg", caption: "Bird Sanctuary" }
-  ],
-  career: [
-    { url: "./career/career1.jpg", caption: "Career Day - Guest Speaker" },
-    { url: "./career/career2.jpg", caption: "Students in Professional Attire" },
-    { url: "./career/career3.jpg", caption: "Career Fair Booths" },
-    { url: "./career/career4.jpg", caption: "Young Engineers Club" },
-    { url: "./career/career5.jpg", caption: "Medical Career Talk" },
-    { url: "./career/career6.jpg", caption: "Aviation & Technology Session" },
-    { url: "./career/career7.jpg", caption: "Career Day - Guest Speaker" },
-    { url: "./career/career8.jpg", caption: "Students in Professional Attire" },
-    { url: "./career/career9.jpg", caption: "Career Fair Booths" },
-    { url: "./career/career10.jpg", caption: "Young Engineers Club" },
-    { url: "./career/career11.jpg", caption: "Medical Career Talk" },
-    { url: "./career/career12.jpg", caption: "Aviation & Technology Session" },
-    { url: "./career/career13.jpg", caption: "Career Day - Guest Speaker" },
-    { url: "./career/career14.jpg", caption: "Students in Professional Attire" },
-    { url: "./career/career15.jpg", caption: "Career Fair Booths" },
-    { url: "./career/career16.jpg", caption: "Young Engineers Club" },
-    { url: "./career/career17.jpg", caption: "Medical Career Talk" },
-    { url: "./career/career18.jpg", caption: "Aviation & Technology Session" },
-    { url: "./career/career19.jpg", caption: "Career Day - Guest Speaker" },
-    { url: "./career/career20.jpg", caption: "Students in Professional Attire" },
-    { url: "./career/career21.jpg", caption: "Aviation & Technology Session" }
-  ],
-  assembly: [
-    { url: "https://picsum.photos/id/135/500/350", caption: "Morning Assembly" },
-    { url: "https://picsum.photos/id/145/500/350", caption: "Student Presentation on Stage" },
-    { url: "https://picsum.photos/id/146/500/350", caption: "Assembly Awards Ceremony" },
-    { url: "https://picsum.photos/id/147/500/350", caption: "Pledge & National Anthem" },
-    { url: "https://picsum.photos/id/155/500/350", caption: "Principal's Address" },
-    { url: "https://picsum.photos/id/159/500/350", caption: "Creative Assembly Display" }
-  ],
-  studentCatalogues: [
-    { url: "https://picsum.photos/id/169/500/350", caption: "Student Portfolio Cover" },
-    { url: "https://picsum.photos/id/170/500/350", caption: "Art & Craft Catalogue" },
-    { url: "https://picsum.photos/id/175/500/350", caption: "Science Project Showcase" },
-    { url: "https://picsum.photos/id/176/500/350", caption: "Literary Magazine" },
-    { url: "https://picsum.photos/id/180/500/350", caption: "Annual Student Directory" },
-    { url: "https://picsum.photos/id/186/500/350", caption: "Achievements Record" }
-  ]
+  cultural: {
+    description: "Cultural celebration is to showcase and celebrate our cultural diversity through interactive and educational activities. Our school engaged in traditional fashion parades, cultural dances, food festival featuring local dishes, languages, games word arts and craft exhibition.",
+    images: [
+      { url: "./cultural/proprietor.png", caption: "Proprietor's Attire" },
+      { url: "./cultural/proprietress.png", caption: "Proprietress's Attire" },
+      { url: "./cultural/cultural1.png", caption: "Student's Attire" },
+      { url: "./cultural/cultural2.png", caption: "Cultural Attires" },
+      { url: "./cultural/cultural3.png", caption: "Student's Attire" },
+      { url: "./cultural/cultural4.png", caption: "Cultural Attires" }
+    ]
+  },
+  indomie: {
+    description: "",
+    images: [
+      { url: "https://picsum.photos/id/127/500/350", caption: "Indomie Factory Tour" },
+      { url: "https://picsum.photos/id/129/500/350", caption: "Production Line" },
+      { url: "https://picsum.photos/id/113/500/350", caption: "Students at Indomie" },
+      { url: "https://picsum.photos/id/109/500/350", caption: "Packaging Section" },
+      { url: "https://picsum.photos/id/70/500/350", caption: "Learning Process" }
+    ]
+  },
+  badagry: {
+    description: "Badagry, situated in the historic coast of Lagos State. It served as one of West Africa's most prominent slave ports during the Transatlantic Slave Trade. The historic narrative of the slave trade mainly attributed to a step Mannaplus took to embark on an excursion to Badagry slave trade site. Badagry stands as an important historic monument, with preserved heritage museums slave relics.",
+    images: [
+      { url: "./badagry/badagry.jpg", caption: "Badagry Heritage Museum Statue" },
+      { url: "./badagry/badagry1.jpg", caption: "some shots taken" },
+      { url: "./badagry/badagry2.jpg", caption: "Archaeological Relics" },
+      { url: "./badagry/badagry3.jpg", caption: "some shots taken" },
+      { url: "./badagry/badagry4.jpg", caption: "First Storey Building in Nigeria" },
+      { url: "./badagry/badagry5.jpg", caption: "Mobee Royal Family Museum" },
+      { url: "./badagry/badagry6.jpg", caption: "some shots taken" },
+      { url: "./badagry/badagry7.jpg", caption: "some shots taken" },
+      { url: "./badagry/badagry8.jpg", caption: "Archaeological Relics" },
+      { url: "./badagry/badagry9.jpg", caption: "some shots taken" },
+      { url: "./badagry/badagry10.jpg", caption: "some shots taken" }
+    ]
+  },
+  obasanjo: {
+    description: "",
+    images: [
+      { url: "./obasanjo/obasanjo.jpg", caption: "Presidential Library" },
+      { url: "./obasanjo/obasanjo1.jpg", caption: "Presidential Library" },
+      { url: "./obasanjo/obasanjo2.jpg", caption: "Presidential Library" },
+      { url: "./obasanjo/obasanjo3.jpg", caption: "Presidential Library" },
+      { url: "./obasanjo/obasanjo4.jpg", caption: "Presidential Library" },
+      { url: "./obasanjo/obasanjo5.jpg", caption: "Presidential Library" }
+    ]
+  },
+  abeokuta: {
+    description: "",
+    images: [
+      { url: "https://picsum.photos/id/96/500/350", caption: "Olumo Rock" },
+      { url: "https://picsum.photos/id/190/500/350", caption: "Abeokuta City View" },
+      { url: "https://picsum.photos/id/168/500/350", caption: "Historical Sites" }
+    ]
+  },
+  wildlife: {
+    description: "",
+    images: [
+      { url: "./wildlife/donkey.jpg", caption: "Donkey in Habitat" },
+      { url: "./wildlife/horse.jpg ", caption: "Horses at Library" },
+      { url: "./wildlife/hyena.jpg", caption: "Hyena in Habitat" },
+      { url: "./wildlife/wildlife1.jpg", caption: "Students at Wildlife Section" },
+      { url: "./wildlife/peacock.jpg", caption: "Bird Sanctuary" }
+    ]
+  },
+  career: {
+    description: "",
+    images: [
+      { url: "./career/career1.jpg", caption: "Career Day - Guest Speaker" },
+      { url: "./career/career2.jpg", caption: "Students in Professional Attire" },
+      { url: "./career/career3.jpg", caption: "Career Fair Booths" },
+      { url: "./career/career4.jpg", caption: "Young Engineers Club" },
+      { url: "./career/career5.jpg", caption: "Medical Career Talk" },
+      { url: "./career/career6.jpg", caption: "Aviation & Technology Session" },
+      { url: "./career/career7.jpg", caption: "Career Day - Guest Speaker" },
+      { url: "./career/career8.jpg", caption: "Students in Professional Attire" },
+      { url: "./career/career9.jpg", caption: "Career Fair Booths" },
+      { url: "./career/career10.jpg", caption: "Young Engineers Club" },
+      { url: "./career/career11.jpg", caption: "Medical Career Talk" },
+      { url: "./career/career12.jpg", caption: "Aviation & Technology Session" },
+      { url: "./career/career13.jpg", caption: "Career Day - Guest Speaker" },
+      { url: "./career/career14.jpg", caption: "Students in Professional Attire" },
+      { url: "./career/career15.jpg", caption: "Career Fair Booths" },
+      { url: "./career/career16.jpg", caption: "Young Engineers Club" },
+      { url: "./career/career17.jpg", caption: "Medical Career Talk" },
+      { url: "./career/career18.jpg", caption: "Aviation & Technology Session" },
+      { url: "./career/career19.jpg", caption: "Career Day - Guest Speaker" },
+      { url: "./career/career20.jpg", caption: "Students in Professional Attire" },
+      { url: "./career/career21.jpg", caption: "Aviation & Technology Session" }
+    ]
+  },
+  assembly: {
+    description: "",
+    images: [
+      { url: "./assembly/assembly2.jpg", caption: "Morning Assembly" },
+      { url: "./assembly/assembly4.jpg", caption: "Student Presentation on Stage" },
+      { url: "./assembly/assembly5.jpg", caption: "Assembly Awards Ceremony" },
+      { url: "./assembly/assembly6.jpg", caption: "Pledge & National Anthem" },
+      { url: "./assembly/assembly3.jpg", caption: "Proprietress's Address" },
+      { url: "./assembly/assembly7.jpg", caption: "Creative Assembly Display" }
+    ]
+  },
+  studentCatalogues: {
+    description: "",
+    images: [
+      { url: "https://picsum.photos/id/169/500/350", caption: "Student Portfolio Cover" },
+      { url: "https://picsum.photos/id/170/500/350", caption: "Art & Craft Catalogue" },
+      { url: "https://picsum.photos/id/175/500/350", caption: "Science Project Showcase" },
+      { url: "https://picsum.photos/id/176/500/350", caption: "Literary Magazine" },
+      { url: "https://picsum.photos/id/180/500/350", caption: "Annual Student Directory" },
+      { url: "https://picsum.photos/id/186/500/350", caption: "Achievements Record" }
+    ]
+  }
 };
 
 let galleryState = { view: "main" };
 
-// ========== RENDER GALLERY ==========
+// ========== RENDER GALLERY (with description support) ==========
 function renderGallery() {
   const container = document.getElementById("galleryDynamicContent");
   if (!container) return;
@@ -463,22 +538,68 @@ function renderGallery() {
     });
   } 
   else if (galleryState.view === "gallery") {
-    let images = [], title = "";
+    let images = [], title = "", description = "";
     const sub = galleryState.sub;
-    if (sub === "cultural") { images = galleryImages.cultural; title = "🎭 Cultural Celebration"; }
-    else if (sub === "indomie") { images = galleryImages.indomie; title = "🍜 Excursion: Indomie Company"; }
-    else if (sub === "badagry") { images = galleryImages.badagry; title = "⛓️ Excursion: Badagry Slave Trade"; }
-    else if (sub === "obasanjo") { images = galleryImages.obasanjo; title = "🏛️ Obasanjo Presidential Library"; }
-    else if (sub === "abeokuta") { images = galleryImages.abeokuta; title = "⛰️ Excursion: Abeokuta"; }
-    else if (sub === "wildlife") { images = galleryImages.wildlife; title = "🦒 Wildlife Section (OPL)"; }
-    else if (sub === "career") { images = galleryImages.career; title = "💼 Career Day Highlights"; }
-    else if (sub === "assembly") { images = galleryImages.assembly; title = "🎤 Assembly Display Moments"; }
-    else if (sub === "studentcatalogues") { images = galleryImages.studentCatalogues; title = "📚 Student Catalogues & Portfolios"; }
+    if (sub === "cultural") { 
+      const data = galleryImages.cultural;
+      images = data.images; 
+      description = data.description || ""; 
+      title = "🎭 Cultural Celebration"; 
+    }
+    else if (sub === "indomie") { 
+      const data = galleryImages.indomie;
+      images = data.images; 
+      description = data.description || ""; 
+      title = "🍜 Excursion: Indomie Company"; 
+    }
+    else if (sub === "badagry") { 
+      const data = galleryImages.badagry;
+      images = data.images; 
+      description = data.description || ""; 
+      title = "⛓️ Excursion: Badagry Slave Trade"; 
+    }
+    else if (sub === "obasanjo") { 
+      const data = galleryImages.obasanjo;
+      images = data.images; 
+      description = data.description || ""; 
+      title = "🏛️ Obasanjo Presidential Library"; 
+    }
+    else if (sub === "abeokuta") { 
+      const data = galleryImages.abeokuta;
+      images = data.images; 
+      description = data.description || ""; 
+      title = "⛰️ Excursion: Abeokuta"; 
+    }
+    else if (sub === "wildlife") { 
+      const data = galleryImages.wildlife;
+      images = data.images; 
+      description = data.description || ""; 
+      title = "🦒 Wildlife Section (OPL)"; 
+    }
+    else if (sub === "career") { 
+      const data = galleryImages.career;
+      images = data.images; 
+      description = data.description || ""; 
+      title = "💼 Career Day Highlights"; 
+    }
+    else if (sub === "assembly") { 
+      const data = galleryImages.assembly;
+      images = data.images; 
+      description = data.description || ""; 
+      title = "🎤 Assembly Display Moments"; 
+    }
+    else if (sub === "studentcatalogues") { 
+      const data = galleryImages.studentCatalogues;
+      images = data.images; 
+      description = data.description || ""; 
+      title = "📚 Student Catalogues & Portfolios"; 
+    }
 
     let backLabel = (galleryState.previous === "excursion") ? "Back to Excursions" : "Back to Categories";
     let gridHtml = `
       <button class="back-nav-btn" id="backFromGalleryBtn"><i class="fas fa-arrow-left"></i> ${backLabel}</button>
       <h3>${title}</h3>
+      ${description ? `<div class="gallery-description">${description}</div>` : ''}
       <div class="image-grid">
     `;
     images.forEach(img => {
@@ -487,8 +608,7 @@ function renderGallery() {
     gridHtml += `</div>`;
     container.innerHTML = gridHtml;
 
-    // ----- ATTACH LIGHTBOX CLICK HANDLERS (Slider) -----
-        // ----- ATTACH LIGHTBOX CLICK HANDLERS + 404 FALLBACK -----
+    // ----- ATTACH LIGHTBOX CLICK HANDLERS + 404 FALLBACK -----
     const imagesInGrid = container.querySelectorAll('.grid-img-card img');
     const allImageData = [];
     imagesInGrid.forEach(img => {
@@ -498,6 +618,7 @@ function renderGallery() {
       
       // FALLBACK: if image fails to load, replace with placeholder
       img.onerror = function() {
+        if (this.src.includes('placehold.co')) return;
         this.src = 'https://placehold.co/500x350/071f17/f59e0b?text=Image+Not+Found&font=Montserrat';
         this.alt = 'Image not available';
       };
@@ -510,7 +631,6 @@ function renderGallery() {
       };
     });
     // ----- END LIGHTBOX -----
-    
 
     document.getElementById("backFromGalleryBtn")?.addEventListener("click", () => {
       if (galleryState.previous === "excursion") {
@@ -522,7 +642,7 @@ function renderGallery() {
       }
     });
 
-    // Scroll the dynamic content to top so the back button is visible
+    // Scroll to top of content
     setTimeout(() => {
       container.scrollTop = 0;
     }, 50);
@@ -665,39 +785,81 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'ArrowLeft') prevImage();
     if (e.key === 'ArrowRight') nextImage();
   });
-  // ========== GLOBAL IMAGE 404 FALLBACK (works for all images, including dynamically added ones) ==========
-document.addEventListener('DOMContentLoaded', function() {
-  // Handle existing images
+});
+
+// ========== PROSPECTUS DOWNLOAD HANDLER ==========
+document.getElementById('downloadProspectusBtn')?.addEventListener('click', function(e) {
+  e.preventDefault();
+
+  // If you have a real PDF, uncomment and upload prospectus.pdf
+  // window.location.href = '/prospectus.pdf';
+  // return;
+
+  const prospectusContent = `
+Mannaplus Group of Schools
+==========================
+Prospectus 2026/2027 Academic Session
+
+📍 Main Campus:
+34, Orisun Ibukun Avenue, Arinko Road,
+Sango Ota, Ogun State, Nigeria.
+
+📞 Phone: +234 812 345 6789
+✉️ Email: info@mannaplusgroup.edu.ng
+
+📚 Available Classes:
+- kg (Grades 1-2)
+- Nursery (1-2)
+- Primary (1-6)
+- College (JSS1 - SSS3)
+
+✨ Admission Requirements:
+1. Completed application form
+2. Previous school report (if any)
+3. Entrance examination (English, Maths, GK)
+4. Parent/guardian interview
+
+💰 Fees & Payment Plans:
+Please contact the admissions office for the latest fee schedule.
+
+📅 Important Dates:
+- Application deadline: August 20th, 2026
+- Entrance exam: August 25th – 27th, 2026
+- Resumption: September 7th, 2026
+
+For more details, visit our website or call the admissions office.
+
+--- Grooming the Future Leaders ---
+`;
+
+  const blob = new Blob([prospectusContent], { type: 'text/plain' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'Mannaplus_Prospectus.txt';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+});
+
+// ========== GLOBAL IMAGE 404 FALLBACK (added for safety) ==========
+document.addEventListener('DOMContentLoaded', () => {
+  const handleError = (img) => {
+    if (img.src.includes('placehold.co')) return;
+    img.src = 'https://placehold.co/600x400/071f17/f59e0b?text=Image+Not+Found&font=Montserrat';
+    img.alt = 'Image not available';
+  };
   document.querySelectorAll('img').forEach(img => {
-    img.onerror = function() {
-      if (this.src.includes('placehold.co')) return; // avoid infinite loop
-      this.src = 'https://placehold.co/600x400/071f17/f59e0b?text=Image+Not+Found&font=Montserrat';
-      this.alt = 'Image not available';
-    };
+    img.onerror = () => handleError(img);
   });
-  
-  // Also handle images added later (like gallery images)
-  const observer = new MutationObserver(function(mutations) {
-    mutations.forEach(function(mutation) {
-      mutation.addedNodes.forEach(function(node) {
-        if (node.nodeName === 'IMG') {
-          node.onerror = function() {
-            if (this.src.includes('placehold.co')) return;
-            this.src = 'https://placehold.co/600x400/071f17/f59e0b?text=Image+Not+Found&font=Montserrat';
-            this.alt = 'Image not available';
-          };
-        } else if (node.querySelectorAll) {
-          node.querySelectorAll('img').forEach(img => {
-            img.onerror = function() {
-              if (this.src.includes('placehold.co')) return;
-              this.src = 'https://placehold.co/600x400/071f17/f59e0b?text=Image+Not+Found&font=Montserrat';
-              this.alt = 'Image not available';
-            };
-          });
-        }
+  const observer = new MutationObserver(mutations => {
+    mutations.forEach(m => {
+      m.addedNodes.forEach(node => {
+        if (node.nodeName === 'IMG') node.onerror = () => handleError(node);
+        if (node.querySelectorAll) node.querySelectorAll('img').forEach(img => img.onerror = () => handleError(img));
       });
     });
   });
   observer.observe(document.body, { childList: true, subtree: true });
-});
 });
