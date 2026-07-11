@@ -18,6 +18,7 @@ Desktop.ini
 # wrangler files
 .wrangler/
 wrangler.toml
+wrangler.jsonc
 
 .dev.vars*
 !.dev.vars.example
@@ -44,5 +45,5 @@ build/
 
 
 
-
+pages-plugin-asset-negitiation
 mannaplus.html
