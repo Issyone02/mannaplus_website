@@ -1,6 +1,46 @@
+# Mac OS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows system files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+
+.vscode/
+*.code-workspace
+
+
+
+
 # wrangler files
-.wrangler
+.wrangler/
+wrangler.toml
+
 .dev.vars*
 !.dev.vars.example
 .env*
 !.env.example
+
+.env.local
+
+node_modules/
+package-lock.json
+yarn.lock
+npm-debug.log*
+
+
+*.log
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+dist/
+build/
+
+
+mannaplus.html

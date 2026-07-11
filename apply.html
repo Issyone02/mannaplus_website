@@ -204,7 +204,7 @@
           <!-- Formspree integration – replace YOUR_FORM_ID with your actual Formspree endpoint -->
           <form
             id="applicationForm"
-            action="https://formspree.io/f/YOUR_FORM_ID"
+            action="https://formspree.io/f/mgojwvkg"
             method="POST"
           >
             <!-- Student Information -->
@@ -241,6 +241,10 @@
               <label>Applying for Class *</label>
               <select name="class" id="class" required>
                 <option value="">Select Grade</option>
+                <option>KG 1</option>
+                <option>KG 2</option>
+                <option>Nursery 1</option>
+                <option>Nursery 2</option>
                 <option>Primary 1</option>
                 <option>Primary 2</option>
                 <option>Primary 3</option>
@@ -352,6 +356,45 @@
               autocomplete="off"
             />
 
+            <div
+              class="form-group"
+              style="display: flex; align-items: flex-start; gap: 0.6rem"
+            >
+              <input
+                type="checkbox"
+                id="consentCheckApply"
+                name="consent"
+                required
+                style="
+                  margin-top: 0.3rem;
+                  width: 18px;
+                  height: 18px;
+                  flex-shrink: 0;
+                "
+              />
+              <label
+                for="consentCheckApply"
+                style="
+                  font-size: 0.85rem;
+                  color: var(--text-muted);
+                  font-weight: 400;
+                  text-transform: none;
+                  letter-spacing: normal;
+                "
+              >
+                I confirm that I am the parent or legal guardian of the
+                applicant named above, and I consent, on their behalf, to
+                Mannaplus Group of Schools collecting and processing the
+                information in this application in line with the
+                <a
+                  href="privacy-policy.html"
+                  target="_blank"
+                  style="color: var(--gold); text-decoration: underline"
+                  >Privacy Policy</a
+                >.
+              </label>
+            </div>
+
             <button type="submit" class="btn-submit">
               <i class="fas fa-paper-plane"></i> Submit Application
             </button>
@@ -411,9 +454,9 @@
               <h4>Resources</h4>
               <ul>
                 <li><a href="#">Academic Calendar</a></li>
-                <li><a href="#">Parent Portal</a></li>
-                <li><a href="#">Student E-Mail</a></li>
-                <li><a href="#">Staff Portal</a></li>
+                <li><a href="privacy-policy.html">Privacy-Policy</a></li>
+                <li><a href="term-conditions.html">Terms & Conditions</a></li>
+                <li><a href="#">Term & Conditions</a></li>
                 <li><a href="#">Career @Mannaplus</a></li>
               </ul>
             </div>

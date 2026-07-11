@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="/logo.png" sizes="64x64" />
     <title>Mannaplus Group of Schools | Grooming the Future Leaders</title>
-    <!-- Google Fonts & Font Awesome -->
     <link
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
@@ -14,12 +13,42 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
-
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css" />
+    <!-- Cloudflare Turnstile CAPTCHA -->
+    <script
+      src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+      async
+      defer
+    ></script>
+    <style>
+      /* ── Turnstile widget styles ── */
+      .turnstile-wrap {
+        margin: 1rem 0 0.6rem;
+      }
+      .ts-error {
+        display: none;
+        align-items: center;
+        gap: 0.45rem;
+        color: #fca5a5;
+        font-size: 0.85rem;
+        margin-bottom: 0.6rem;
+        padding: 0.6rem 0.9rem;
+        background: rgba(239, 68, 68, 0.1);
+        border: 1px solid rgba(239, 68, 68, 0.3);
+        border-radius: 10px;
+      }
+      .ts-error.show {
+        display: flex;
+      }
+      .form-submit:disabled {
+        opacity: 0.65;
+        cursor: not-allowed;
+        transform: none !important;
+        box-shadow: none !important;
+      }
+    </style>
   </head>
   <body>
-    <!-- Dynamic Background -->
     <div class="bg-canvas">
       <div class="orb orb-1"></div>
       <div class="orb orb-2"></div>
@@ -27,9 +56,7 @@
       <div class="orb orb-4"></div>
       <div class="grid-lines"></div>
     </div>
-
     <div class="page-wrap">
-      <!-- NAVBAR -->
       <header id="navbar" class="navbar">
         <div class="nav-inner">
           <div class="logo-wrap">
@@ -48,7 +75,6 @@
             <li><a href="#programs">Primary</a></li>
             <li><a href="#college">College</a></li>
             <li><a href="#mcq">Quiz</a></li>
-            <!-- NEW GALLERY BUTTON (added only here, no existing link removed) -->
             <li>
               <a href="#" id="galleryNavBtn"
                 ><i class="fas fa-images"></i> Gallery</a
@@ -59,53 +85,48 @@
           </ul>
         </div>
       </header>
-
-      <!-- ANNOUNCEMENT TICKER -->
       <div class="ticker-wrap">
         <div class="ticker">
           <div class="ticker__item">
-            <i class="fas fa-calendar-alt"></i>
-            <strong>📢 UPCOMING EXAMS:</strong> Final Term Examinations – June
+            <i class="fas fa-calendar-alt"></i
+            ><strong>📢 UPCOMING EXAMS:</strong> Final Term Examinations – June
             15th to June 28th, 2026
           </div>
           <div class="ticker__item">
-            <i class="fas fa-chalkboard"></i>
-            <strong>✍️ MOCK EXAMS (SS3):</strong> July 5th – July 12th, 2026
+            <i class="fas fa-chalkboard"></i
+            ><strong>✍️ MOCK EXAMS (SS3):</strong> July 5th – July 12th, 2026
           </div>
           <div class="ticker__item">
-            <i class="fas fa-school"></i>
-            <strong>🏫 RESUMPTION (2026/2027 SESSION):</strong> Monday,
+            <i class="fas fa-school"></i
+            ><strong>🏫 RESUMPTION (2026/2027 SESSION):</strong> Monday,
             September 7th, 2026
           </div>
           <div class="ticker__item">
-            <i class="fas fa-file-alt"></i>
-            <strong>📝 REGISTRATION DEADLINE:</strong> August 20th, 2026 – Apply
-            now!
+            <i class="fas fa-file-alt"></i
+            ><strong>📝 REGISTRATION DEADLINE:</strong> August 20th, 2026 –
+            Apply now!
           </div>
-          <!-- Duplicate for seamless loop -->
           <div class="ticker__item">
-            <i class="fas fa-calendar-alt"></i>
-            <strong>📢 UPCOMING EXAMS:</strong> Final Term Examinations – June
+            <i class="fas fa-calendar-alt"></i
+            ><strong>📢 UPCOMING EXAMS:</strong> Final Term Examinations – June
             15th to June 28th, 2026
           </div>
           <div class="ticker__item">
-            <i class="fas fa-chalkboard"></i>
-            <strong>✍️ MOCK EXAMS (SS3):</strong> July 5th – July 12th, 2026
+            <i class="fas fa-chalkboard"></i
+            ><strong>✍️ MOCK EXAMS (SS3):</strong> July 5th – July 12th, 2026
           </div>
           <div class="ticker__item">
-            <i class="fas fa-school"></i>
-            <strong>🏫 RESUMPTION (2026/2027 SESSION):</strong> Monday,
+            <i class="fas fa-school"></i
+            ><strong>🏫 RESUMPTION (2026/2027 SESSION):</strong> Monday,
             September 7th, 2026
           </div>
           <div class="ticker__item">
-            <i class="fas fa-file-alt"></i>
-            <strong>📝 REGISTRATION DEADLINE:</strong> August 20th, 2026 – Apply
-            now!
+            <i class="fas fa-file-alt"></i
+            ><strong>📝 REGISTRATION DEADLINE:</strong> August 20th, 2026 –
+            Apply now!
           </div>
         </div>
       </div>
-
-      <!-- HERO -->
       <section id="home">
         <div class="container">
           <div class="hero-grid">
@@ -148,10 +169,7 @@
               <div class="slider-wrap">
                 <div class="slides" id="heroSlides">
                   <div class="slide">
-                    <img
-                      src="assembly/assembly2.webp"
-                      alt="School Campus"
-                    />
+                    <img src="assembly/assembly2.webp" alt="School Campus" />
                     <div class="slide-caption">
                       <i class="fas fa-map-marker-alt"></i> Main Campus —
                       Mannaplus Primary
@@ -205,7 +223,6 @@
         </div>
       </section>
 
-      <!-- ABOUT -->
       <section id="about">
         <div class="container">
           <div class="text-center">
@@ -272,7 +289,6 @@
         </div>
       </section>
 
-      <!-- PRIMARY PROGRAMS -->
       <section id="programs">
         <div class="container">
           <div class="text-center">
@@ -318,7 +334,6 @@
         </div>
       </section>
 
-      <!-- GALLERY SLIDER -->
       <section id="gallery">
         <div class="container">
           <div class="gallery-title reveal">
@@ -359,7 +374,6 @@
         </div>
       </section>
 
-      <!-- COLLEGE -->
       <section id="college">
         <div class="container">
           <div class="text-center">
@@ -425,7 +439,6 @@
         </div>
       </section>
 
-      <!-- MCQ QUIZ -->
       <section id="mcq">
         <div class="container">
           <div class="text-center">
@@ -534,7 +547,6 @@
         </div>
       </section>
 
-      <!-- ADMISSIONS -->
       <section id="admissions">
         <div class="container">
           <div class="text-center">
@@ -582,7 +594,9 @@
           <div class="admissions-cta">
             <a href="apply.html" class="btn-gold"
               ><i class="fas fa-file-alt"></i> Apply Now</a
-            ><a href="#" id="downloadProspectusBtn" class="btn-glass"><i class="fas fa-download"></i> Download Prospectus</a>
+            ><a href="#" id="downloadProspectusBtn" class="btn-glass"
+              ><i class="fas fa-download"></i> Download Prospectus</a
+            >
           </div>
         </div>
       </section>
@@ -647,51 +661,155 @@
             </div>
             <div class="contact-form glass reveal">
               <h3>Send an Enquiry</h3>
-              <form id="contactForm" action="https://formspree.io/f/mykvavdd" method="POST">
-  <div class="form-row">
-    <div class="form-group">
-      <label>Full Name *</label>
-      <input type="text" name="name" placeholder="e.g. Adebayo Okonkwo" required>
-    </div>
-    <div class="form-group">
-      <label>Email *</label>
-      <input type="email" name="email" placeholder="your@email.com" required>
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="form-group">
-      <label>Phone</label>
-      <input type="tel" name="phone" placeholder="+234 800 000 0000">
-    </div>
-    <div class="form-group">
-      <label>Interest</label>
-      <select name="interest">
-        <option>Primary School Enquiry</option>
-        <option>College (JSS1–SSS3) Enquiry</option>
-        <option>Admissions Information</option>
-        <option>General Enquiry</option>
-      </select>
-    </div>
-  </div>
-  <div class="form-group">
-    <label>Message</label>
-    <textarea name="message" rows="4" placeholder="Your message or question..."></textarea>
-  </div>
-  <!-- Honeypot spam protection (hidden) -->
-  <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
-  <button type="submit" class="form-submit">
-    <i class="fas fa-paper-plane"></i> Send Message
-  </button>
-  <p class="form-success" id="formSuccess">
-    ✅ Thank you! The admissions office will respond to you shortly.
-  </p>
-</form>
+              <form
+                id="contactForm"
+                action="https://formspree.io/f/mykvavdd"
+                method="POST"
+              >
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>Full Name *</label
+                    ><input
+                      type="text"
+                      name="name"
+                      placeholder="e.g. Adebayo Okonkwo"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>Email *</label
+                    ><input
+                      type="email"
+                      name="email"
+                      placeholder="your@email.com"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>Phone</label
+                    ><input
+                      type="tel"
+                      name="phone"
+                      placeholder="+234 800 000 0000"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>Interest</label
+                    ><select name="interest">
+                      <option>Primary School Enquiry</option>
+                      <option>College (JSS1–SSS3) Enquiry</option>
+                      <option>Admissions Information</option>
+                      <option>General Enquiry</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Message</label
+                  ><textarea
+                    name="message"
+                    rows="4"
+                    placeholder="Your message or question..."
+                  ></textarea>
+                </div>
+
+                <!-- Consent checkbox (NDPA 2023 compliance) -->
+                <div
+                  class="form-group"
+                  style="display: flex; align-items: flex-start; gap: 0.6rem"
+                >
+                  <input
+                    type="checkbox"
+                    id="consentCheck"
+                    name="consent"
+                    required
+                    style="
+                      margin-top: 0.3rem;
+                      width: 18px;
+                      height: 18px;
+                      flex-shrink: 0;
+                      accent-color: var(--gold);
+                    "
+                  />
+                  <label
+                    for="consentCheck"
+                    style="
+                      font-size: 0.85rem;
+                      color: var(--text-muted);
+                      font-weight: 400;
+                      text-transform: none;
+                      letter-spacing: normal;
+                    "
+                  >
+                    I consent to Mannaplus Group of Schools collecting and
+                    processing the information above in line with the
+                    <a
+                      href="privacy-policy.html"
+                      target="_blank"
+                      style="color: var(--gold); text-decoration: underline"
+                      >Privacy Policy</a
+                    >.
+                  </label>
+                </div>
+
+                <!-- Honeypot (hidden, keeps existing spam trap) -->
+                <input
+                  type="text"
+                  name="_gotcha"
+                  style="display: none"
+                  tabindex="-1"
+                  autocomplete="off"
+                />
+
+                <!-- Cloudflare Turnstile widget -->
+                <div class="turnstile-wrap">
+                  <div
+                    class="cf-turnstile"
+                    id="cfTurnstile"
+                    data-sitekey="0x4AAAAAADnZzEo_49IOxsdn"
+                    data-theme="dark"
+                    data-size="normal"
+                  ></div>
+                </div>
+
+                <!-- Shown only if the Turnstile script itself fails to load (e.g. ad-blocker) -->
+                <p
+                  class="ts-error"
+                  id="tsBlocked"
+                  style="
+                    background: rgba(245, 158, 11, 0.1);
+                    border-color: rgba(245, 158, 11, 0.3);
+                    color: #fde68a;
+                  "
+                >
+                  <i class="fas fa-info-circle"></i>
+                  Don't see a verification box above? An ad-blocker or privacy
+                  extension may be hiding it. Please disable it for this site
+                  (or try a different browser), then refresh the page to send
+                  your message.
+                </p>
+
+                <!-- Error shown if visitor skips the CAPTCHA -->
+                <p class="ts-error" id="tsError">
+                  <i class="fas fa-shield-alt"></i>
+                  Please complete the security check above before sending your
+                  message.
+                </p>
+
+                <button type="submit" class="form-submit" id="formSubmitBtn">
+                  <i class="fas fa-paper-plane"></i> Send Message
+                </button>
+                <p class="form-success" id="formSuccess">
+                  ✅ Thank you! The admissions office will respond to you
+                  shortly.
+                </p>
+              </form>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- FOOTER -->
       <footer>
         <div class="container">
           <div class="footer-grid">
@@ -743,9 +861,9 @@
               <h4>Resources</h4>
               <ul>
                 <li><a href="#">Academic Calendar</a></li>
+                <li><a href="privacy-policy.html">Privacy-Policy</a></li>
+                <li><a href="term-conditions.html">Terms & Conditions</a></li>
                 <li><a href="#">Parent Portal</a></li>
-                <li><a href="#">Student E-Mail</a></li>
-                <li><a href="#">Staff Portal</a></li>
                 <li><a href="#">Career @Mannaplus</a></li>
               </ul>
             </div>
@@ -775,7 +893,6 @@
       <i class="fas fa-chevron-up"></i>
     </button>
 
-    <!-- NEW GALLERY MODAL (added at the end of body, does not interfere) -->
     <div id="photoGalleryModal" class="gallery-modal">
       <div class="gallery-container">
         <div class="gallery-header">
@@ -787,20 +904,77 @@
         <div id="galleryDynamicContent"></div>
       </div>
     </div>
-
-    <!-- LIGHTBOX MODAL WITH SLIDER BUTTONS -->
     <div id="lightboxModal" class="lightbox-modal">
-      <span class="lightbox-close">&times;</span>
-      <button class="lightbox-prev" id="lightboxPrev">
-        <i class="fas fa-chevron-left"></i>
-      </button>
-      <img class="lightbox-content" id="lightboxImg" />
-      <button class="lightbox-next" id="lightboxNext">
+      <span class="lightbox-close">&times;</span
+      ><button class="lightbox-prev" id="lightboxPrev">
+        <i class="fas fa-chevron-left"></i></button
+      ><img class="lightbox-content" id="lightboxImg" /><button
+        class="lightbox-next"
+        id="lightboxNext"
+      >
         <i class="fas fa-chevron-right"></i>
       </button>
       <div class="lightbox-caption" id="lightboxCaption"></div>
     </div>
 
     <script src="script.js"></script>
+
+    <!-- Turnstile form guard — runs after script.js so it overrides any existing submit handler -->
+    <script>
+      (function () {
+        var form = document.getElementById("contactForm");
+        var errorEl = document.getElementById("tsError");
+        var blockedEl = document.getElementById("tsBlocked");
+        var submitBtn = document.getElementById("formSubmitBtn");
+
+        if (!form) return;
+
+        // Remove any previously attached onsubmit (e.g. from script.js)
+        form.onsubmit = null;
+
+        // If the Turnstile script never loads (commonly due to an ad-blocker /
+        // privacy extension blocking challenges.cloudflare.com), let the visitor know.
+        setTimeout(function () {
+          if (typeof window.turnstile === "undefined" && blockedEl) {
+            blockedEl.classList.add("show");
+          }
+        }, 3500);
+
+        form.addEventListener("submit", function (e) {
+          // Hide previous error
+          errorEl.classList.remove("show");
+
+          // Check Turnstile token
+          var tokenInput = form.querySelector('[name="cf-turnstile-response"]');
+          if (!tokenInput || !tokenInput.value.trim()) {
+            e.preventDefault(); // Stop Formspree submission
+            errorEl.classList.add("show");
+            // If the script never loaded at all, surface the ad-blocker hint too
+            if (typeof window.turnstile === "undefined" && blockedEl) {
+              blockedEl.classList.add("show");
+            }
+            errorEl.scrollIntoView({ behavior: "smooth", block: "center" });
+            return;
+          }
+
+          // Valid token — disable button to prevent double-submit
+          submitBtn.disabled = true;
+          submitBtn.innerHTML =
+            '<i class="fas fa-spinner fa-spin"></i> Sending…';
+
+          // Formspree handles the actual POST; reset UI after a short delay
+          // (Formspree will redirect or show its own confirmation)
+          setTimeout(function () {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML =
+              '<i class="fas fa-paper-plane"></i> Send Message';
+            // Reset the widget for the next submission
+            if (window.turnstile) {
+              turnstile.reset("#cfTurnstile");
+            }
+          }, 6000);
+        });
+      })();
+    </script>
   </body>
 </html>
